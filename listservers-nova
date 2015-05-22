@@ -1,0 +1,31 @@
+#!/usr/bin python
+#
+# Example Python Openstack code written by Bill Harper@Metacloud 8.2.2014
+#
+# This example will list the instances running an particular tenant 
+# We will force authentication in this example to make it easy
+# 
+# Example to List Servers will use the nova API's or Methods that the CLI tools use
+# 
+# First, lets import the library so we can use it, note we are using v1_1.  If it were a different
+# version, the calls could be and would be different.  Please refere to those docs for examples
+#
+from novaclient.v1_1 import client
+#
+# Next we will setup our login details
+#
+USER = 'demoadmin'
+PASS = '**********'
+TENANT = 'Demo Admin'
+AUTH_URL = 'http://api-demo1.client.metacloud.net:5000/v2.0'
+#
+# Next we will assign self to the api login API call 
+# 
+self = client.Client(username=USER, api_key=PASS, project_id=TENANT, auth_url=AUTH_URL)
+#
+# Now lets setup a simple loop to list the running instances out on the screen and
+# Put a text wrapper around the listing of the running OpenStack Instances
+print "--------------------------Instance List Command:--------------------------" 
+for servers in self.servers.list():
+    print(servers.name)
+print "-----------------------------End List Command:----------------------------" 
